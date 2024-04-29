@@ -30,10 +30,16 @@ public class OrderDetail {
     @ManyToOne
     @JoinColumn(name = "customerId", nullable = false)
     private Customer customer;
-    @ManyToOne()
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "carId", nullable = false)
     private Car car;
-    @OneToOne
+    @OneToOne(mappedBy = "orderDetail")
     private CarOrder carOrder;
+
+    public void setCar(Car car) {
+        this.car = car;
+        car.getOrderDetails().add(this);
+    }
+
 
 }

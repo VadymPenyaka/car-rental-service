@@ -7,9 +7,10 @@ import java.time.LocalDate;
 
 @Data
 @Builder
-public class OrderInfoDTO {
+public class OrderDetailDTO {
     private  long id;
     private CarDTO car;
+    private CustomerDTO customer;
     private int numberOfDays;
     private LocalDate pickUpDate;
     private LocalDate dropOffDate;

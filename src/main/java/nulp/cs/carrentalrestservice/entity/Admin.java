@@ -22,10 +22,7 @@ public class Admin {
     private String lastName;
     @Column(nullable = false, length = 50)
     private String password;
-    @OneToMany(mappedBy = "admin")
+    @OneToMany(mappedBy = "admin", cascade =  CascadeType.ALL)
     private Set<CarOrder> carOrders=new HashSet<>();
-
-    public void addOrder (CarOrder carOrder) {
-
-    }
+    
 }

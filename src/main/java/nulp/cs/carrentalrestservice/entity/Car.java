@@ -30,7 +30,12 @@ public class Car {
     @Column(nullable = false, length = 5, columnDefinition = "varchar(5)")
     private boolean isAvailable;
 
-    @OneToMany(mappedBy = "car")
+    @OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
     private Set<OrderDetail> orderDetails;
+
+    public void removeOrderDetail (OrderDetail orderDetail) {
+        this.getOrderDetails().remove(orderDetail);
+
+    }
 
 }

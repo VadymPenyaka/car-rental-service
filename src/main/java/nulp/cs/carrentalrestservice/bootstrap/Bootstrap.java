@@ -2,15 +2,10 @@ package nulp.cs.carrentalrestservice.bootstrap;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import nulp.cs.carrentalrestservice.entity.Admin;
-import nulp.cs.carrentalrestservice.entity.Car;
-import nulp.cs.carrentalrestservice.entity.Customer;
-import nulp.cs.carrentalrestservice.entity.OrderDetail;
+import nulp.cs.carrentalrestservice.entity.*;
 import nulp.cs.carrentalrestservice.model.CarClass;
-import nulp.cs.carrentalrestservice.repository.AdminRepository;
-import nulp.cs.carrentalrestservice.repository.CarRepository;
-import nulp.cs.carrentalrestservice.repository.CustomerRepository;
-import nulp.cs.carrentalrestservice.repository.OrderDetailRepository;
+import nulp.cs.carrentalrestservice.model.Status;
+import nulp.cs.carrentalrestservice.repository.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
@@ -25,6 +20,7 @@ public class Bootstrap implements CommandLineRunner {
 
     private final AdminRepository adminRepository;
     private final OrderDetailRepository orderDetailRepository;
+    private final CarOrderRepository carOrderRepository;
 
     @Override
     @Transactional
@@ -33,71 +29,83 @@ public class Bootstrap implements CommandLineRunner {
         createAdmin();
         createCustomer();
         createOrderDetail();
+        createOrder();
+    }
+
+    private void createOrder() {
+        if (carOrderRepository.count()==0) {
+            carOrderRepository.saveAndFlush(
+                    CarOrder.builder()
+                            .status(Status.IN_USE)
+                            .orderDetail(orderDetailRepository.findAll().get(0))
+                            .admin(adminRepository.findAll().get(0))
+                            .adminComment("Comment")
+                            .build()
+            );
+
+        }
     }
 
     private void createOrderDetail() {
-        System.out.println(carRepository.findAll().get(0).toString());
-        OrderDetail orderDetail = OrderDetail.builder()
-                .numberOfDays(1)
-                .pickUpDate(LocalDate.now())
-                .pickUpLocation("Lviv")
-                .dropOffDate(LocalDate.now())
-                .dropOffLocation("Lviv")
-                .totalPrice(123.2)
-                .customer(customerRepository.findAll().get(0))
-                .car(carRepository.findAll().get(0))
-                .build();
+        if (orderDetailRepository.count()==0) {
+            OrderDetail orderDetail = OrderDetail.builder()
+                    .id(Long.valueOf(123))
+                    .numberOfDays(1)
+                    .pickUpDate(LocalDate.now())
+                    .pickUpLocation("Lviv")
+                    .dropOffDate(LocalDate.now())
+                    .dropOffLocation("Lviv")
+                    .totalPrice(123.2)
+                    .customer(customerRepository.findAll().get(0))
+                    .car(carRepository.findAll().get(0))
+                    .build();
+            orderDetailRepository.saveAndFlush(orderDetail);
+        }
 
-        orderDetailRepository.saveAndFlush(orderDetail);
+
+
     }
 
     private void createCars () {
-//        checkIfEmptyOrDelete(carRepository);
-        carRepository.saveAndFlush(
-                Car.builder()
-                        .carClass(CarClass.BUSINESS)
-                        .brand("BMW")
-                        .isAvailable(true)
-                        .pricePerDay(100.0)
-                        .model("X5")
-                        .build()
-        );
+        if (carRepository.count()==0) {
+            carRepository.saveAndFlush(
+                    Car.builder()
+                            .carClass(CarClass.BUSINESS)
+                            .brand("BMW")
+                            .isAvailable(true)
+                            .pricePerDay(100.0)
+                            .model("X5")
+                            .build()
+            );
+        }
 
     }
 
     private void createCustomer () {
-//        checkIfEmptyOrDelete(customerRepository);
-        customerRepository.saveAndFlush(
-                Customer.builder()
-                        .birthDate(LocalDate.now())
-                        .expiryDate(LocalDate.now())
-                        .firstName("FirstName")
-                        .lastName("LastName")
-                        .sureName("SureName")
-                        .passportId("12345678")
-                        .build()
-        );
+        if (customerRepository.count()==0) {
+            customerRepository.saveAndFlush(
+                    Customer.builder()
+                            .birthDate(LocalDate.now())
+                            .expiryDate(LocalDate.now())
+                            .firstName("FirstName")
+                            .lastName("LastName")
+                            .sureName("SureName")
+                            .passportId("12345678")
+                            .build()
+            );
+        }
     }
 
     private void createAdmin () {
-//        checkIfEmptyOrDelete(adminRepository);
-        adminRepository.saveAndFlush(
-                Admin.builder()
-                        .password("password")
-                        .firstName("FirstName")
-                        .lastName("LastName")
-                        .build()
-        );
-    }
-
-
-
-    private boolean checkIfEmptyOrDelete (JpaRepository jpaRepository) {
-        if (jpaRepository.count()==0)
-            return true;
-        else {
-            jpaRepository.deleteAll();
-            return false;
+        if (adminRepository.count()==0) {
+            adminRepository.saveAndFlush(
+                    Admin.builder()
+                            .password("password")
+                            .firstName("FirstName")
+                            .lastName("LastName")
+                            .build()
+            );
         }
     }
+
 }

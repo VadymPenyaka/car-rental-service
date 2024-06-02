@@ -33,9 +33,9 @@ public class Car {
     @OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
     private Set<OrderDetail> orderDetails;
 
+
     public void removeOrderDetail (OrderDetail orderDetail) {
         this.getOrderDetails().remove(orderDetail);
-
     }
 
 }

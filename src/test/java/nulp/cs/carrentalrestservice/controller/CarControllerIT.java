@@ -33,7 +33,7 @@ class CarControllerIT {
     @Test
     void getAllCars() {
         List<CarDTO> carDTOS = controller.getAllCars();
-
+        System.out.println(carDTOS);
         assertThat(carDTOS.size()).isEqualTo(1);
     }
 
@@ -60,6 +60,8 @@ class CarControllerIT {
     }
 
     @Test
+    @Rollback
+    @Transactional
     void updateCarById() {
         Car expected = carRepository.findAll().get(0);
         CarDTO expectedDTO = carMapper.carToCarDto(expected);
@@ -71,5 +73,16 @@ class CarControllerIT {
 
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
         assertThat(carRepository.findAll().get(0).getModel()).isEqualTo(updateModel);
+    }
+
+    @Test
+    @Rollback
+    @Transactional
+    void deleteCarById () {
+        Car car = carRepository.findAll().get(0);
+
+        ResponseEntity responseEntity = controller.deleteCarById(car.getId());
+
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
     }
 }

@@ -26,9 +26,5 @@ public class CarOrder {
     @Column(columnDefinition = "varchar(50)")
     private String adminComment;
 
-//    public void setOrderDetail(OrderDetail orderDetail) {
-//        this.orderDetail = orderDetail;
-//        orderDetail.setCarOrder(this);
-//    }
 }
 

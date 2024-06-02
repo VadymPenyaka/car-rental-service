@@ -2,6 +2,7 @@ package nulp.cs.carrentalrestservice.controller;
 
 import lombok.RequiredArgsConstructor;
 import nulp.cs.carrentalrestservice.Exception.NotFoundException;
+import nulp.cs.carrentalrestservice.model.CarOrderDTO;
 import nulp.cs.carrentalrestservice.model.OrderDetailDTO;
 import nulp.cs.carrentalrestservice.service.OrderDetailService;
 import org.springframework.http.HttpStatus;
@@ -35,4 +36,10 @@ public class OrderDetailController {
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @GetMapping(ORDER_DETAIL_BASE_PATH_V2)
+    public OrderDetailDTO getOrderDetailByOrder (@RequestBody CarOrderDTO carOrderDTO) {
+        return orderDetailService.getOrderDetailByOrder(carOrderDTO).orElseThrow(NotFoundException::new);
+    }
+
 }

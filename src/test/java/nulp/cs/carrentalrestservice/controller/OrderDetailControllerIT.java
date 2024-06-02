@@ -3,7 +3,9 @@ package nulp.cs.carrentalrestservice.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.transaction.Transactional;
 import nulp.cs.carrentalrestservice.entity.OrderDetail;
+import nulp.cs.carrentalrestservice.mapper.CarOrderMapper;
 import nulp.cs.carrentalrestservice.mapper.OrderDetailMapper;
+import nulp.cs.carrentalrestservice.model.CarOrderDTO;
 import nulp.cs.carrentalrestservice.model.OrderDetailDTO;
 import nulp.cs.carrentalrestservice.repository.OrderDetailRepository;
 import org.junit.jupiter.api.Test;
@@ -12,6 +14,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.Rollback;
+
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -24,10 +28,10 @@ class OrderDetailControllerIT {
     private OrderDetailMapper orderDetailMapper;
 
     @Autowired
-    private ObjectMapper objectMapper;
+    private OrderDetailRepository orderDetailRepository;
 
     @Autowired
-    private OrderDetailRepository orderDetailRepository;
+    private CarOrderMapper carOrderMapper;
 
     @Test
     void gerOrderDetailById() {
@@ -65,5 +69,15 @@ class OrderDetailControllerIT {
 
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
         assertThat(orderDetailRepository.findAll().get(0).getNumberOfDays()).isEqualTo(numberOfDays);
+    }
+
+    @Test
+    void getOrderDetailByOrder () {
+        OrderDetail expected = orderDetailRepository.findAll().get(0);
+
+        OrderDetailDTO actual = orderDetailController.getOrderDetailByOrder(carOrderMapper
+                .carOrderToCarOrderDto(expected.getCarOrder()));
+
+        assertThat(orderDetailMapper.orderDetailToOrderDetailDto(expected)).isEqualTo(actual);
     }
 }

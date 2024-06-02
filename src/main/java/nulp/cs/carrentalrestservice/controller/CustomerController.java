@@ -14,7 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CustomerController {
     public static final String CUSTOMER_BASE_PATH_V1 = "/api/v1/customers";
-
+    public static final String CUSTOMER_BASE_PATH_V2 = "/api/v2/customers";
     private final CustomerService customerService;
 
     @GetMapping(CUSTOMER_BASE_PATH_V1+"/{id}")
@@ -29,7 +29,18 @@ public class CustomerController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    @PutMapping(CUSTOMER_BASE_PATH_V1+"/{id}")
+    public ResponseEntity updateCustomerById (@PathVariable Long id, @RequestBody CustomerDTO customerDTO) {
+        if(customerService.updateCustomerById(id, customerDTO).isEmpty())
+            throw new NotFoundException();
 
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping(CUSTOMER_BASE_PATH_V2+"/findByName")
+    public List<CustomerDTO> getCustomersByLastName (@RequestParam String lastName) {
+        return customerService.getCustomersByLastName(lastName);
+    }
 
 
 }

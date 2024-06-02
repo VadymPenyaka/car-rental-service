@@ -4,8 +4,10 @@ import lombok.RequiredArgsConstructor;
 import nulp.cs.carrentalrestservice.entity.CarOrder;
 import nulp.cs.carrentalrestservice.entity.OrderDetail;
 import nulp.cs.carrentalrestservice.mapper.CarMapper;
+import nulp.cs.carrentalrestservice.mapper.CarOrderMapper;
 import nulp.cs.carrentalrestservice.mapper.OrderDetailMapper;
 import nulp.cs.carrentalrestservice.model.CarDTO;
+import nulp.cs.carrentalrestservice.model.CarOrderDTO;
 import nulp.cs.carrentalrestservice.model.OrderDetailDTO;
 import nulp.cs.carrentalrestservice.repository.OrderDetailRepository;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,8 @@ public class OrderDetailServiceImpl implements OrderDetailService {
     private final CarOrderService carOrderService;
 
     private final CarMapper carMapper;
+
+    private final CarOrderMapper carOrderMapper;
 
     @Override
     public OrderDetailDTO createOrderDetail(OrderDetailDTO orderDetailDTO) {
@@ -76,5 +80,11 @@ public class OrderDetailServiceImpl implements OrderDetailService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public Optional<OrderDetailDTO> getOrderDetailByOrder(CarOrderDTO carOrderDTO) {
+        return Optional.ofNullable(orderDetailMapper.orderDetailToOrderDetailDto(orderDetailRepository
+                .findOrderDetailByCarOrder(carOrderMapper.carOrderDtoToCarOrder(carOrderDTO))));
     }
 }

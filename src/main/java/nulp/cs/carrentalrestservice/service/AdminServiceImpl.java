@@ -8,6 +8,7 @@ import nulp.cs.carrentalrestservice.repository.AdminRepository;
 import nulp.cs.carrentalrestservice.repository.CarOrderRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -33,9 +34,11 @@ public class AdminServiceImpl implements AdminService {
 
         adminRepository.findById(id).ifPresentOrElse(foundAdmin -> {
             foundAdmin.setPassword(admin.getPassword());
-            foundAdmin.setFirstName(admin.getLastName());
+            foundAdmin.setFirstName(admin.getFirstName());
             foundAdmin.setLastName(admin.getLastName());
 
+            atomicReference.set(Optional.of(adminMapper
+                    .adminToAdminDto(adminRepository.save(foundAdmin))));
         },()-> atomicReference.set(Optional.empty()));
 
         return atomicReference.get();
@@ -70,6 +73,16 @@ public class AdminServiceImpl implements AdminService {
         return Optional.ofNullable(adminMapper.adminToAdminDto(adminRepository
                 .findAll().stream().min(adminComparator).get()));
     }
+
+    @Override
+    public Optional<AdminDTO> getAdminWithFewestOrders() {
+        List<Admin> admins =  adminRepository.findAll();
+        Collections.sort(admins);
+
+        return Optional.ofNullable(adminMapper.adminToAdminDto(admins.get(0)));
+    }
+
+
 
 
 }

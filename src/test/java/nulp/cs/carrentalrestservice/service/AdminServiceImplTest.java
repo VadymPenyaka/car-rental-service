@@ -1,5 +1,6 @@
 package nulp.cs.carrentalrestservice.service;
 
+import jakarta.transaction.Transactional;
 import nulp.cs.carrentalrestservice.entity.Admin;
 import nulp.cs.carrentalrestservice.mapper.AdminMapperImpl;
 import nulp.cs.carrentalrestservice.model.AdminDTO;
@@ -10,6 +11,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.test.annotation.Rollback;
 
 import java.util.Arrays;
 import java.util.List;
@@ -97,5 +99,31 @@ class AdminServiceImplTest {
 
 
         assertThat(isDeleted).isFalse();
+    }
+
+    @Test
+    @Transactional
+    @Rollback
+    void updateAdminById() {
+        when(adminRepository.findById(any())).thenReturn(Optional.of(admin));
+        when(adminRepository.save(any())).thenReturn(admin);
+        when(adminMapper.adminToAdminDto(any())).thenReturn(adminDTO);
+
+        AdminDTO expected = adminDTO;
+        String updatedName = "UPDATED";
+        expected.setFirstName(updatedName);
+
+        AdminDTO actual = adminService.updateAdminById(expected.getId(), expected).get();
+
+
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    void getAdminByLeastNumbErOfOrders() {
+    }
+
+    @Test
+    void getAdminWithFewestOrders() {
     }
 }

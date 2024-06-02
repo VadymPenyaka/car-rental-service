@@ -12,6 +12,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.Rollback;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
@@ -38,6 +41,8 @@ class CustomerControllerIT {
     }
 
     @Test
+    @Rollback
+    @Transactional
     void createCustomerTest() {
         Customer customer = customerRepository.findAll().get(0);
 
@@ -50,4 +55,31 @@ class CustomerControllerIT {
 
         assertThat(savedCustomer).isNotNull();
     }
+
+    @Test
+    @Rollback
+    @Transactional
+    void updateCustomerById () {
+        CustomerDTO expected = customerMapper.customerToCustomerDto(customerRepository.findAll().get(0));
+        expected.setFirstName("updated");
+
+        ResponseEntity responseEntity = controller.updateCustomerById(expected.getId(), expected);
+
+        CustomerDTO actual = customerMapper.customerToCustomerDto(customerRepository
+                .findById(expected.getId()).get());
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    void getCustomersByFirstName () {
+        List<CustomerDTO> expected = customerRepository.findAll().stream()
+                .map(customerMapper::customerToCustomerDto).toList();
+
+        List<CustomerDTO> actual = controller.getCustomersByLastName(expected.get(0).getLastName());
+
+        assertThat(actual).isEqualTo(expected);
+    }
+
+
 }

@@ -10,6 +10,5 @@ public class StatusEnumConfig implements WebMvcConfigurer {
     @Override
     public void addFormatters(FormatterRegistry registry) {
         registry.addConverter(new StringToEnumConverter());
-
     }
 }

@@ -1,5 +1,6 @@
 package nulp.cs.carrentalrestservice.service;
 
+import jakarta.transaction.Transactional;
 import nulp.cs.carrentalrestservice.entity.Car;
 import nulp.cs.carrentalrestservice.mapper.CarMapperImpl;
 import nulp.cs.carrentalrestservice.model.CarClass;
@@ -11,6 +12,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.test.annotation.Rollback;
 
 import java.util.Arrays;
 import java.util.List;
@@ -29,6 +31,9 @@ class CarServiceImplTest {
 
     @Mock
     private CarMapperImpl carMapper;
+
+    @Mock
+    OrderDetailServiceImpl orderDetailService;
 
     @InjectMocks
     private CarServiceImpl carService;
@@ -89,6 +94,7 @@ class CarServiceImplTest {
     @Test
     void deleteCarById_ReturnTrue() {
         when(carRepository.existsById(any())).thenReturn(true);
+        when(carRepository.findById(any())).thenReturn(Optional.ofNullable(car));
 
         boolean isDeleted = carService.deleteCarById(carDTO.getId());
 

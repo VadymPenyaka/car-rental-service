@@ -77,6 +77,17 @@ public class Bootstrap implements CommandLineRunner {
                             .model("X5")
                             .build()
             );
+
+//            carRepository.saveAndFlush(
+//                    Car.builder()
+//                            .carClass(CarClass.COMFORT)
+//                            .brand("SKODA")
+//                            .isAvailable(false)
+//                            .pricePerDay(100.0)
+//                            .model("Oktavia A7")
+//                            .build()
+//            );
+
         }
 
     }

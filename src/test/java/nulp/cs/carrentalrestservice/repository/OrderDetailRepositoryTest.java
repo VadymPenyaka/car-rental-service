@@ -1,8 +1,10 @@
 package nulp.cs.carrentalrestservice.repository;
 
+import jakarta.transaction.Transactional;
 import nulp.cs.carrentalrestservice.entity.Car;
 import nulp.cs.carrentalrestservice.entity.Customer;
 import nulp.cs.carrentalrestservice.entity.OrderDetail;
+import nulp.cs.carrentalrestservice.model.CarClass;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import java.time.LocalDate;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
+@Transactional
 public class OrderDetailRepositoryTest {
     @Autowired
     private OrderDetailRepository orderDetailRepository;
@@ -38,8 +41,8 @@ public class OrderDetailRepositoryTest {
                 .passportId("12345678")
                 .build();
         customerRepository.saveAndFlush(customer);
-
         car = carRepository.findAll().get(0);
+
 
         orderDetail = OrderDetail.builder()
                 .pickUpDate(LocalDate.now())
@@ -55,7 +58,7 @@ public class OrderDetailRepositoryTest {
 
     @Test
     void saveOrderInfoTest() {
-        OrderDetail savedOrderDetail = orderDetailRepository.saveAndFlush(orderDetail);
+        OrderDetail savedOrderDetail = orderDetailRepository.save(orderDetail);
 
         assertThat(savedOrderDetail).isNotNull();
     }

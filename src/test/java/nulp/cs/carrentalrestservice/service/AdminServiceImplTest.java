@@ -120,10 +120,13 @@ class AdminServiceImplTest {
     }
 
     @Test
-    void getAdminByLeastNumbErOfOrders() {
-    }
-
-    @Test
     void getAdminWithFewestOrders() {
+        when(adminRepository.findAll()).thenReturn(Arrays.asList(admin));
+        when(adminMapper.adminToAdminDto(any())).thenReturn(adminDTO);
+
+
+        AdminDTO actual = adminService.getAdminWithFewestOrders().get();
+
+        assertThat(actual).isEqualTo(adminDTO);
     }
 }

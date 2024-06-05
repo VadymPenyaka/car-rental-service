@@ -66,13 +66,13 @@ public class AdminServiceImpl implements AdminService {
         return false;
     }
 
-    @Override
-    public Optional<AdminDTO> getAdminByLeastNumbErOfOrders() {
-        Comparator<Admin> adminComparator = Comparator.comparingInt(a -> a.getCarOrders().size());
-
-        return Optional.ofNullable(adminMapper.adminToAdminDto(adminRepository
-                .findAll().stream().min(adminComparator).get()));
-    }
+//    @Override
+//    public Optional<AdminDTO> getAdminByLeastNumbErOfOrders() {
+//        Comparator<Admin> adminComparator = Comparator.comparingInt(a -> a.getCarOrders().size());
+//
+//        return Optional.ofNullable(adminMapper.adminToAdminDto(adminRepository
+//                .findAll().stream().min(adminComparator).get()));
+//    }
 
     @Override
     public Optional<AdminDTO> getAdminWithFewestOrders() {

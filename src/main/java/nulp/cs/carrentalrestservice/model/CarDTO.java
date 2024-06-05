@@ -12,4 +12,7 @@ public class CarDTO {
         private double pricePerDay;
         private CarClass carClass;
         private boolean isAvailable;
+        private int fuelConsumption;
+        private int numberOfSeats;
+        private double pledge;
 }

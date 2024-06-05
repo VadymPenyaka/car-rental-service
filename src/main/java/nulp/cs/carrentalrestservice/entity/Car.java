@@ -29,6 +29,12 @@ public class Car {
     private CarClass carClass;
     @Column(nullable = false, length = 5, columnDefinition = "varchar(5)")
     private boolean isAvailable;
+    @Column(nullable = false)
+    private Integer fuelConsumption;
+    @Column(nullable = false)
+    private Integer numberOfSeats;
+    @Column(nullable = false)
+    private Double pledge;
 
     @OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
     private Set<OrderDetail> orderDetails;

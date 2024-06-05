@@ -75,6 +75,9 @@ public class Bootstrap implements CommandLineRunner {
                             .isAvailable(true)
                             .pricePerDay(100.0)
                             .model("X5")
+                            .fuelConsumption(10)
+                            .numberOfSeats(5)
+                            .pledge(500.00)
                             .build()
             );
 

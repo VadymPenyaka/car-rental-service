@@ -33,9 +33,10 @@ public class Car {
     private Integer fuelConsumption;
     @Column(nullable = false)
     private Integer numberOfSeats;
-    @Column(nullable = false)
-    private Double pledge;
 
+    @OneToOne
+    @JoinColumn(name = "carPricingId", referencedColumnName = "id")
+    private CarPricing carPricing;
     @OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
     private Set<OrderDetail> orderDetails;
 

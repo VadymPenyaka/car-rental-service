@@ -14,5 +14,4 @@ public class CarDTO {
         private boolean isAvailable;
         private int fuelConsumption;
         private int numberOfSeats;
-        private double pledge;
 }

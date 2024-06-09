@@ -44,7 +44,6 @@ public class CarOrderServiceImpl implements CarOrderService {
 
         carOrderRepository.findById(id).ifPresentOrElse(foundOrder -> {
             foundOrder.setStatus(carOrderDTO.getStatus());
-            foundOrder.setAdminComment(carOrderDTO.getAdminComment());
             atomicReference.set(Optional.of(carOrderMapper.carOrderToCarOrderDto(carOrderRepository.save(foundOrder))));
         }, ()-> atomicReference.set(Optional.empty()));
 

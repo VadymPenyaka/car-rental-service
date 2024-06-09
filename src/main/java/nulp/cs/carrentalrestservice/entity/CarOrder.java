@@ -23,8 +23,7 @@ public class CarOrder {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Status status;
-    @Column(columnDefinition = "varchar(50)")
-    private String adminComment;
+
 
 }
 

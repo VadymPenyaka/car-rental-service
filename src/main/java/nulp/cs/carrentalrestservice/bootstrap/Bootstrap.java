@@ -39,7 +39,6 @@ public class Bootstrap implements CommandLineRunner {
                             .status(Status.IN_USE)
                             .orderDetail(orderDetailRepository.findAll().get(0))
                             .admin(adminRepository.findAll().get(0))
-                            .adminComment("Comment")
                             .build()
             );
 

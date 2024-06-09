@@ -10,5 +10,4 @@ public class CarOrderDTO {
     private AdminDTO admin;
     private Status status;
     private OrderDetailDTO orderDetail;
-    private String adminComment;
 }

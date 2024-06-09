@@ -17,4 +17,5 @@ public class OrderDetailDTO {
     private String pickUpLocation;
     private String dropOffLocation;
     private double totalPrice;
+    private String comment;
 }

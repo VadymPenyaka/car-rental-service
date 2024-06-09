@@ -35,6 +35,8 @@ public class OrderDetail {
     private Car car;
     @OneToOne(mappedBy = "orderDetail")
     private CarOrder carOrder;
+    @Column(columnDefinition = "varchar(50)")
+    private String comment;
 
     public void setCar(Car car) {
         this.car = car;

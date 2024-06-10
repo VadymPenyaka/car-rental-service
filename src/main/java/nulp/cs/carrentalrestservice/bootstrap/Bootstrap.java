@@ -25,11 +25,16 @@ public class Bootstrap implements CommandLineRunner {
     @Override
     @Transactional
     public void run(String... args) throws Exception {
+        createCarPricing();
         createCars();
         createAdmin();
         createCustomer();
         createOrderDetail();
         createOrder();
+    }
+
+    private void createCarPricing() {
+
     }
 
     private void createOrder() {
@@ -76,7 +81,6 @@ public class Bootstrap implements CommandLineRunner {
                             .model("X5")
                             .fuelConsumption(10)
                             .numberOfSeats(5)
-                            .pledge(500.00)
                             .build()
             );
 

@@ -22,6 +22,8 @@ public class Bootstrap implements CommandLineRunner {
     private final OrderDetailRepository orderDetailRepository;
     private final CarOrderRepository carOrderRepository;
 
+    private final CarPricingRepository carPricingRepository;
+
     @Override
     @Transactional
     public void run(String... args) throws Exception {
@@ -34,7 +36,17 @@ public class Bootstrap implements CommandLineRunner {
     }
 
     private void createCarPricing() {
-
+        if(carPricingRepository.count()==0) {
+            carPricingRepository.saveAndFlush(
+                    CarPricing.builder()
+                            .pledge(300.0)
+                            .upToThreeDays(250.0)
+                            .upToTenDays(200.0)
+                            .upToMonth(150.0)
+                            .moreThenMonth(120.0)
+                            .build()
+            );
+        }
     }
 
     private void createOrder() {
@@ -79,6 +91,7 @@ public class Bootstrap implements CommandLineRunner {
                             .isAvailable(true)
                             .pricePerDay(100.0)
                             .model("X5")
+                            .carPricing(carPricingRepository.findAll().get(0))
                             .fuelConsumption(10)
                             .numberOfSeats(5)
                             .build()

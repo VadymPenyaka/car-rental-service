@@ -33,6 +33,8 @@ public class Car {
     private Integer fuelConsumption;
     @Column(nullable = false)
     private Integer numberOfSeats;
+    @Column(nullable = false)
+    private String location;
 
     @OneToOne
     @JoinColumn(name = "carPricingId", referencedColumnName = "id")

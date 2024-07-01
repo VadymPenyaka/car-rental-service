@@ -27,12 +27,21 @@ public class Bootstrap implements CommandLineRunner {
     @Override
     @Transactional
     public void run(String... args) throws Exception {
+        deleteAllData();
         createCarPricing();
         createCars();
         createAdmin();
         createCustomer();
         createOrderDetail();
         createOrder();
+    }
+
+    private void deleteAllData () {
+        carOrderRepository.deleteAll();
+        orderDetailRepository.deleteAll();
+        adminRepository.deleteAll();
+        carRepository.deleteAll();
+        customerRepository.deleteAll();
     }
 
     private void createCarPricing() {
@@ -94,6 +103,7 @@ public class Bootstrap implements CommandLineRunner {
                             .carPricing(carPricingRepository.findAll().get(0))
                             .fuelConsumption(10)
                             .numberOfSeats(5)
+                            .location("Lviv, Gorodotska St. 12")
                             .build()
             );
 

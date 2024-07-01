@@ -16,4 +16,6 @@ public interface CarService {
 
     Optional<CarDTO> updateCarByID(Long id, CarDTO carDTO);
 
+    List<CarDTO> getCarsByCarClass (String carClass);
+
 }

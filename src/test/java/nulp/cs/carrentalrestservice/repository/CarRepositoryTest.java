@@ -27,6 +27,9 @@ public class CarRepositoryTest {
                 .brand("BMW")
                 .isAvailable(true)
                 .pricePerDay(100.0)
+                .fuelConsumption(10)
+                .location("Lviv")
+                .numberOfSeats(5)
                 .model("X5")
                 .build();
     }

@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import nulp.cs.carrentalrestservice.Exception.NotFoundException;
 import nulp.cs.carrentalrestservice.model.CarDTO;
 import nulp.cs.carrentalrestservice.service.CarService;
+import org.h2.util.StringUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -56,7 +57,5 @@ public class CarController {
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
-
 
 }

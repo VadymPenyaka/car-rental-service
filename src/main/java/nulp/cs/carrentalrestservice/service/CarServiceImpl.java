@@ -2,6 +2,7 @@ package nulp.cs.carrentalrestservice.service;
 
 import lombok.RequiredArgsConstructor;
 import nulp.cs.carrentalrestservice.mapper.CarMapper;
+import nulp.cs.carrentalrestservice.model.CarClass;
 import nulp.cs.carrentalrestservice.model.CarDTO;
 import nulp.cs.carrentalrestservice.model.OrderDetailDTO;
 import nulp.cs.carrentalrestservice.repository.CarRepository;
@@ -66,6 +67,15 @@ public class CarServiceImpl implements CarService {
         );
 
         return atomicReference.get();
+    }
+
+    @Override
+    public List<CarDTO> getCarsByCarClass(String carClassString) {
+        carClassString = carClassString.toUpperCase();
+        CarClass carClass = CarClass.valueOf(carClassString);
+
+        return carRepository.findAllByCarClass(carClass).stream()
+                .map(carMapper::carToCarDto).toList();
     }
 
 

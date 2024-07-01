@@ -47,10 +47,14 @@ public class CarOrderController {
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping(CAR_ORDER_BASE_PATH_V1+"/status")
+    @RequestMapping(value = CAR_ORDER_BASE_PATH_V1, method = RequestMethod.GET)
     public List<CarOrderDTO> getAllCarOrdersByStatus (@RequestParam Status status) {
         return carOrderService.getAllCarOrdersByStatus(status);
     }
+
+//    @GetMapping(CAR_ORDER_BASE_PATH_V1 + "/{adminId}" + "/status") {
+//
+//    }
 
 
 

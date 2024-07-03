@@ -52,9 +52,11 @@ public class CarOrderController {
         return carOrderService.getAllCarOrdersByStatus(status);
     }
 
-//    @GetMapping(CAR_ORDER_BASE_PATH_V1 + "/{adminId}" + "/status") {
-//
-//    }
+    @GetMapping(CAR_ORDER_BASE_PATH_V1 +"/byAdminAndStatus" + "/{adminId}")
+    public List<CarOrderDTO> getCarsByAdminAndStatus (@PathVariable("adminId") Long adminId, @RequestParam Status status) {
+
+        return carOrderService.getCarOrdersByAdminAndStatus(adminId, status);
+    }
 
 
 

@@ -62,10 +62,10 @@ public class CarOrderServiceImpl implements CarOrderService {
     }
 
     @Override
-    public List<CarOrderDTO> getCarOrdersByAdminAndStatus(Long adminId, Status status) {
+    public List<CarOrderDTO> getCarOrdersByAdminAndStatus(Long adminId, Status status) throws NumberFormatException{
 
-//        Admin admin = adminRepository.findById(adminId).orElseThrow(NotFoundException::new);
-        Admin admin = adminRepository.findById(adminId).get();
+        Admin admin = adminRepository.findById(adminId).orElseThrow(NotFoundException::new);
+
         return carOrderRepository.getCarOrdersByAdminAndStatus(admin, status).stream()
                 .map(carOrderMapper::carOrderToCarOrderDto).toList();
     }

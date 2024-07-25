@@ -64,48 +64,22 @@
 			<artifactId>mapstruct</artifactId>
 			<version>1.5.5.Final</version>
 		</dependency>
-<!--		&lt;!&ndash; https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security &ndash;&gt;-->
-<!--		<dependency>-->
-<!--			<groupId>org.springframework.boot</groupId>-->
-<!--			<artifactId>spring-boot-starter-security</artifactId>-->
-<!--			<version>3.2.5</version>-->
-<!--		</dependency>-->
-
 
 		<dependency>
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-core</artifactId>
 			<version>10.15.2</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.googlecode.flyway/flyway-core -->
-<!--		<dependency>-->
-<!--			<groupId>com.googlecode.flyway</groupId>-->
-<!--			<artifactId>flyway-core</artifactId>-->
-<!--			<version>2.3.1</version>-->
-<!--		</dependency>-->
-
-		<!-- https://mvnrepository.com/artifact/org.flywaydb/flyway-mysql -->
 		<dependency>
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-mysql</artifactId>
 			<version>10.15.2</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui -->
 		<dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
 			<version>2.6.0</version>
 		</dependency>
-
-
-		<!-- https://mvnrepository.com/artifact/org.flywaydb/flyway-maven-plugin -->
-<!--		<dependency>-->
-<!--			<groupId>org.flywaydb</groupId>-->
-<!--			<artifactId>flyway-maven-plugin</artifactId>-->
-<!--			<version>10.15.2</version>-->
-<!--		</dependency>-->
-
-
 
     </dependencies>
 

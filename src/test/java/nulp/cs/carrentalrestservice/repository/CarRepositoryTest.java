@@ -3,6 +3,8 @@ package nulp.cs.carrentalrestservice.repository;
 import jakarta.transaction.Transactional;
 import nulp.cs.carrentalrestservice.entity.Car;
 import nulp.cs.carrentalrestservice.model.CarClass;
+import nulp.cs.carrentalrestservice.model.FuelType;
+import nulp.cs.carrentalrestservice.model.GearboxType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,9 @@ public class CarRepositoryTest {
                 .pricePerDay(100.0)
                 .fuelConsumption(10)
                 .location("Lviv")
+                .gearboxType(GearboxType.AUTOMATIC)
+                .fuelType(FuelType.DIESEL)
+                .fuelConsumption(10)
                 .numberOfSeats(5)
                 .model("X5")
                 .build();

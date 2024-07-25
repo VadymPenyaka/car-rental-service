@@ -3,6 +3,8 @@ package nulp.cs.carrentalrestservice.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import nulp.cs.carrentalrestservice.model.CarClass;
+import nulp.cs.carrentalrestservice.model.FuelType;
+import nulp.cs.carrentalrestservice.model.GearboxType;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -18,6 +20,7 @@ public class Car {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
+    //separate into another entity
     @Column(nullable = false, columnDefinition = "varchar(50)", length = 50)
     private String brand;
     @Column(nullable = false, length = 50)
@@ -35,6 +38,11 @@ public class Car {
     private Integer numberOfSeats;
     @Column(nullable = false)
     private String location;
+    @Column(nullable = false)
+    private FuelType fuelType;
+    @Column(nullable = false, name = "gearbox_type")
+    private GearboxType gearboxType;
+
 
     @OneToOne
     @JoinColumn(name = "carPricingId", referencedColumnName = "id")

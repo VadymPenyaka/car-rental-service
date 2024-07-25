@@ -16,6 +16,7 @@
 	<properties>
 		<java.version>17</java.version>
 	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -29,11 +30,19 @@
 		</dependency>
 
 
+<!--		<dependency>-->
+<!--			<groupId>com.mysql</groupId>-->
+<!--			<artifactId>mysql-connector-j</artifactId>-->
+<!--			<scope>runtime</scope>-->
+<!--			<version>8.0.33</version>-->
+<!--		</dependency>-->
+		<!-- https://mvnrepository.com/artifact/com.mysql/mysql-connector-j -->
 		<dependency>
 			<groupId>com.mysql</groupId>
 			<artifactId>mysql-connector-j</artifactId>
-			<scope>runtime</scope>
+			<version>9.0.0</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -48,6 +57,7 @@
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<version>2.2.224</version>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.mapstruct</groupId>
@@ -59,6 +69,40 @@
 <!--			<groupId>org.springframework.boot</groupId>-->
 <!--			<artifactId>spring-boot-starter-security</artifactId>-->
 <!--			<version>3.2.5</version>-->
+<!--		</dependency>-->
+
+
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-core</artifactId>
+			<version>10.15.2</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.googlecode.flyway/flyway-core -->
+<!--		<dependency>-->
+<!--			<groupId>com.googlecode.flyway</groupId>-->
+<!--			<artifactId>flyway-core</artifactId>-->
+<!--			<version>2.3.1</version>-->
+<!--		</dependency>-->
+
+		<!-- https://mvnrepository.com/artifact/org.flywaydb/flyway-mysql -->
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-mysql</artifactId>
+			<version>10.15.2</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui -->
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>2.6.0</version>
+		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/org.flywaydb/flyway-maven-plugin -->
+<!--		<dependency>-->
+<!--			<groupId>org.flywaydb</groupId>-->
+<!--			<artifactId>flyway-maven-plugin</artifactId>-->
+<!--			<version>10.15.2</version>-->
 <!--		</dependency>-->
 
 
@@ -79,6 +123,24 @@
 					</excludes>
 				</configuration>
 			</plugin>
+
+<!--			<plugin>-->
+<!--				<groupId>org.flywaydb</groupId>-->
+<!--				<artifactId>flyway-maven-plugin</artifactId>-->
+<!--				<version>10.15.2</version>-->
+<!--				<configuration>-->
+<!--					<url>jdbc:mysql://localhost:3306/car_rental_service</url>-->
+<!--					<user>root</user>-->
+<!--					<password>12345678</password>-->
+<!--					<locations>-->
+<!--						<location>classpath:db/migration</location>-->
+<!--					</locations>-->
+<!--					<baselineOnMigrate>true</baselineOnMigrate>-->
+<!--					<baselineVersion>1.0</baselineVersion>-->
+<!--					<baselineDescription>init</baselineDescription>-->
+<!--				</configuration>-->
+<!--			</plugin>-->
+
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

@@ -3,9 +3,8 @@ package nulp.cs.carrentalrestservice.controller;
 import jakarta.transaction.Transactional;
 import nulp.cs.carrentalrestservice.entity.CarOrder;
 import nulp.cs.carrentalrestservice.mapper.CarOrderMapper;
-import nulp.cs.carrentalrestservice.model.CarDTO;
 import nulp.cs.carrentalrestservice.model.CarOrderDTO;
-import nulp.cs.carrentalrestservice.model.Status;
+import nulp.cs.carrentalrestservice.model.OrderStatus;
 import nulp.cs.carrentalrestservice.repository.CarOrderRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import static org.assertj.core.api.Assertions.as;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
@@ -71,7 +69,7 @@ class CarOrderControllerIT {
         List<CarOrderDTO> expected = Arrays.asList(carOrderMapper
                 .carOrderToCarOrderDto(carOrderRepository.findAll().get(0)));
 
-        List<CarOrderDTO> actual = controller.getAllCarOrdersByStatus(Status.IN_USE);
+        List<CarOrderDTO> actual = controller.getAllCarOrdersByStatus(OrderStatus.IN_USE);
 
         assertThat(actual).isEqualTo(expected);
     }
@@ -83,7 +81,7 @@ class CarOrderControllerIT {
         CarOrderDTO expected = carOrderMapper
                 .carOrderToCarOrderDto(carOrderRepository.findAll().get(0));
 
-        expected.setStatus(Status.APPROVED);
+        expected.setStatus(OrderStatus.APPROVED);
 
         ResponseEntity responseEntity = controller.updateCarOrderByID(expected.getId(), expected);
         CarOrderDTO actual = carOrderMapper.carOrderToCarOrderDto(carOrderRepository.findById(expected.getId()).get());

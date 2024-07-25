@@ -18,6 +18,7 @@ public class OrderDetail {
     @Column(nullable = false)
     private int numberOfDays;
     @Column(nullable = false)
+    //separate into another entity
     private LocalDate pickUpDate;
     @Column(nullable = false)
     private LocalDate dropOffDate;
@@ -33,10 +34,13 @@ public class OrderDetail {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "carId", nullable = false)
     private Car car;
-    @OneToOne(mappedBy = "orderDetail")
-    private CarOrder carOrder;
     @Column(columnDefinition = "varchar(50)")
     private String comment;
+
+    @OneToOne(mappedBy = "orderDetail")
+    private CarOrder carOrder;
+
+
 
     public void setCar(Car car) {
         this.car = car;

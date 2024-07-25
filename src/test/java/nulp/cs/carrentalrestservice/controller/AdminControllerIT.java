@@ -6,14 +6,19 @@ import nulp.cs.carrentalrestservice.entity.Admin;
 import nulp.cs.carrentalrestservice.mapper.AdminMapper;
 import nulp.cs.carrentalrestservice.model.AdminDTO;
 import nulp.cs.carrentalrestservice.repository.AdminRepository;
+import org.flywaydb.core.Flyway;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
@@ -39,11 +44,19 @@ class AdminControllerIT {
 
     @Autowired
     private WebApplicationContext wac;
+    @Autowired
+    private Flyway flyway;
 
     private MockMvc mockMvc;
 
+
+
     @BeforeEach
     void setUp() {
+        Flyway flyway = Flyway.configure()
+                .locations("classpath:db/migration_test")
+                .dataSource("jdbc:h2:mem:testdb", "root", "12345678")
+                .load();
         mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
     }
 

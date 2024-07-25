@@ -8,6 +8,6 @@ import lombok.Data;
 public class CarOrderDTO {
     private long id;
     private AdminDTO admin;
-    private Status status;
+    private OrderStatus status;
     private OrderDetailDTO orderDetail;
 }

@@ -4,10 +4,11 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import nulp.cs.carrentalrestservice.entity.*;
 import nulp.cs.carrentalrestservice.model.CarClass;
-import nulp.cs.carrentalrestservice.model.Status;
+import nulp.cs.carrentalrestservice.model.FuelType;
+import nulp.cs.carrentalrestservice.model.GearboxType;
+import nulp.cs.carrentalrestservice.model.OrderStatus;
 import nulp.cs.carrentalrestservice.repository.*;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -62,7 +63,7 @@ public class Bootstrap implements CommandLineRunner {
         if (carOrderRepository.count()==0) {
             carOrderRepository.saveAndFlush(
                     CarOrder.builder()
-                            .status(Status.IN_USE)
+                            .status(OrderStatus.IN_USE)
                             .orderDetail(orderDetailRepository.findAll().get(0))
                             .admin(adminRepository.findAll().get(0))
                             .build()
@@ -103,19 +104,11 @@ public class Bootstrap implements CommandLineRunner {
                             .carPricing(carPricingRepository.findAll().get(0))
                             .fuelConsumption(10)
                             .numberOfSeats(5)
+                            .fuelType(FuelType.DIESEL)
+                            .gearboxType(GearboxType.AUTOMATIC)
                             .location("Lviv, Gorodotska St. 12")
                             .build()
             );
-
-//            carRepository.saveAndFlush(
-//                    Car.builder()
-//                            .carClass(CarClass.COMFORT)
-//                            .brand("SKODA")
-//                            .isAvailable(false)
-//                            .pricePerDay(100.0)
-//                            .model("Oktavia A7")
-//                            .build()
-//            );
 
         }
 

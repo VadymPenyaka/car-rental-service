@@ -59,6 +59,7 @@ public class CarServiceImpl implements CarService {
                 foundCar.setCarClass(carDTO.getCarClass());
                 foundCar.setAvailable(carDTO.isAvailable());
                 foundCar.setPricePerDay(carDTO.getPricePerDay());
+                foundCar.setFuelType(carDTO.getFuelType());
                 atomicReference.set(Optional.of(carMapper
                         .carToCarDto(carRepository.save(foundCar))));
             }, ()-> {

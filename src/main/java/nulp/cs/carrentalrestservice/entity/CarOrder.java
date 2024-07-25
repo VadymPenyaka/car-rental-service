@@ -2,7 +2,7 @@ package nulp.cs.carrentalrestservice.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import nulp.cs.carrentalrestservice.model.Status;
+import nulp.cs.carrentalrestservice.model.OrderStatus;
 
 @Entity(name = "car_orders")
 @Getter
@@ -21,8 +21,8 @@ public class CarOrder {
     @JoinColumn(name = "adminId", nullable = false)
     private Admin admin;
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private Status status;
+    @Column(nullable = false, name = "status")
+    private OrderStatus status;
 
 
 }

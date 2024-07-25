@@ -5,7 +5,7 @@ import nulp.cs.carrentalrestservice.Exception.NotFoundException;
 import nulp.cs.carrentalrestservice.entity.Admin;
 import nulp.cs.carrentalrestservice.mapper.CarOrderMapper;
 import nulp.cs.carrentalrestservice.model.CarOrderDTO;
-import nulp.cs.carrentalrestservice.model.Status;
+import nulp.cs.carrentalrestservice.model.OrderStatus;
 import nulp.cs.carrentalrestservice.repository.AdminRepository;
 import nulp.cs.carrentalrestservice.repository.CarOrderRepository;
 import org.springframework.stereotype.Service;
@@ -56,17 +56,17 @@ public class CarOrderServiceImpl implements CarOrderService {
     }
 
     @Override
-    public List<CarOrderDTO> getAllCarOrdersByStatus(Status status) {
-        return carOrderRepository.getAllByStatus(status).stream()
+    public List<CarOrderDTO> getAllCarOrdersByStatus(OrderStatus orderStatus) {
+        return carOrderRepository.getAllByStatus(orderStatus).stream()
                 .map(carOrderMapper::carOrderToCarOrderDto).toList();
     }
 
     @Override
-    public List<CarOrderDTO> getCarOrdersByAdminAndStatus(Long adminId, Status status) throws NumberFormatException{
+    public List<CarOrderDTO> getCarOrdersByAdminAndStatus(Long adminId, OrderStatus orderStatus) throws NumberFormatException{
 
         Admin admin = adminRepository.findById(adminId).orElseThrow(NotFoundException::new);
 
-        return carOrderRepository.getCarOrdersByAdminAndStatus(admin, status).stream()
+        return carOrderRepository.getCarOrdersByAdminAndStatus(admin, orderStatus).stream()
                 .map(carOrderMapper::carOrderToCarOrderDto).toList();
     }
 }

@@ -1,5 +1,5 @@
 package nulp.cs.carrentalrestservice.model;
 
-public enum Status {
+public enum OrderStatus {
     APPROVED, IN_USE, RETURNED, DAMAGED, PAID
 }

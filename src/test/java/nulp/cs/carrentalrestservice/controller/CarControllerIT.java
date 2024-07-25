@@ -5,6 +5,7 @@ import nulp.cs.carrentalrestservice.entity.Car;
 import nulp.cs.carrentalrestservice.mapper.CarMapper;
 import nulp.cs.carrentalrestservice.model.CarDTO;
 import nulp.cs.carrentalrestservice.repository.CarRepository;
+import org.flywaydb.core.Flyway;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -28,7 +29,8 @@ class CarControllerIT {
     @Autowired
     private CarRepository carRepository;
 
-
+    @Autowired
+    private Flyway flyway;
 
     @Test
     void getAllCars() {

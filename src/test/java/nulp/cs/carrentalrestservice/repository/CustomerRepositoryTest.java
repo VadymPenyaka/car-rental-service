@@ -20,7 +20,6 @@ public class CustomerRepositoryTest {
     @Transactional
     void saveUserTest() {
         Customer customer = Customer.builder()
-//                .id(Long.valueOf(1))
                 .birthDate(LocalDate.now())
                 .expiryDate(LocalDate.now())
                 .firstName("FirstName")

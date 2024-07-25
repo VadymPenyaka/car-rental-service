@@ -3,14 +3,11 @@ package nulp.cs.carrentalrestservice.repository;
 import nulp.cs.carrentalrestservice.bootstrap.Bootstrap;
 import nulp.cs.carrentalrestservice.entity.Admin;
 import nulp.cs.carrentalrestservice.entity.CarOrder;
-import nulp.cs.carrentalrestservice.entity.OrderDetail;
-import nulp.cs.carrentalrestservice.model.Status;
+import nulp.cs.carrentalrestservice.model.OrderStatus;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
-
-import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -34,7 +31,7 @@ public class CarOrderRepositoryTest {
 
         CarOrder savedCarOrder = carOrderRepository.save(
                 CarOrder.builder()
-                        .status(Status.IN_USE)
+                        .status(OrderStatus.IN_USE)
                         .admin(admin)
                         .build()
         );

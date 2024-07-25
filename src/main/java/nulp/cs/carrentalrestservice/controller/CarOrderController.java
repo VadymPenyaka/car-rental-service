@@ -3,14 +3,13 @@ package nulp.cs.carrentalrestservice.controller;
 import lombok.RequiredArgsConstructor;
 import nulp.cs.carrentalrestservice.Exception.NotFoundException;
 import nulp.cs.carrentalrestservice.model.CarOrderDTO;
-import nulp.cs.carrentalrestservice.model.Status;
+import nulp.cs.carrentalrestservice.model.OrderStatus;
 import nulp.cs.carrentalrestservice.service.CarOrderService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -48,14 +47,14 @@ public class CarOrderController {
     }
 
     @RequestMapping(value = CAR_ORDER_BASE_PATH_V1, method = RequestMethod.GET)
-    public List<CarOrderDTO> getAllCarOrdersByStatus (@RequestParam Status status) {
-        return carOrderService.getAllCarOrdersByStatus(status);
+    public List<CarOrderDTO> getAllCarOrdersByStatus (@RequestParam OrderStatus orderStatus) {
+        return carOrderService.getAllCarOrdersByStatus(orderStatus);
     }
 
     @GetMapping(CAR_ORDER_BASE_PATH_V1 +"/byAdminAndStatus" + "/{adminId}")
-    public List<CarOrderDTO> getCarsByAdminAndStatus (@PathVariable("adminId") Long adminId, @RequestParam Status status) {
+    public List<CarOrderDTO> getCarsByAdminAndStatus (@PathVariable("adminId") Long adminId, @RequestParam OrderStatus orderStatus) {
 
-        return carOrderService.getCarOrdersByAdminAndStatus(adminId, status);
+        return carOrderService.getCarOrdersByAdminAndStatus(adminId, orderStatus);
     }
 
 

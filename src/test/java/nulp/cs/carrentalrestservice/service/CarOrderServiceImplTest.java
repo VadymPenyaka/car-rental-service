@@ -16,7 +16,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -46,13 +45,13 @@ class CarOrderServiceImplTest {
                 .build();
 
         carOrder = CarOrder.builder()
-                .status(Status.IN_USE)
+                .status(OrderStatus.IN_USE)
                 .admin(admin)
                 .orderDetail(OrderDetail.builder().build())
                 .build();
 
         carOrderDTO = CarOrderDTO.builder()
-                .status(Status.IN_USE)
+                .status(OrderStatus.IN_USE)
                 .admin(adminDTO)
                 .orderDetail(OrderDetailDTO.builder().build())
                 .build();

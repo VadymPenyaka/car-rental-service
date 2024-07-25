@@ -10,5 +10,4 @@ import java.util.Optional;
 
 public interface CarRepository extends JpaRepository<Car, Long> {
     List<Car> findAllByCarClass (CarClass carClass);
-
 }
